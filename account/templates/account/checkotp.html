@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase text-center mx-xl-5 mb-4"><span
+                class="bg-white pr-3">User CheckOTP</span></h2>
+        <div class=" px-xl-5">
+            <div class=" mb-5 contact-us" style="">
+                <div class="contact-form bg-light p-30">
+                    <div id="success"></div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            {{ form.none_field_errors }}
+                            {{ form.code }}
+                        </div>
+
+
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock %}

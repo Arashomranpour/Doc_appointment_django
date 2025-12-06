@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{#{% load crispy_forms_tags %}#}
+{#{% load social_share %}#}
+{% block main %}
+
+
+    <section class="contact-us">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="down-contact">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="sidebar-item contact-form">
+                                    <div class="sidebar-heading">
+                                        <h2>Send us a message</h2>
+                                    </div>
+                                    <div class="content">
+                                        <form id="contact" action="" method="post" class=" p-4 rounded-4">
+                                            <div class="row">
+                                                {%  if form.non_field_errors %}
+                                                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                                                {% endif %}
+                                                <br>
+                                                {{   form.as_table }}
+                                                {% csrf_token %}
+                                                <div class="col-lg-12">
+                                                    <fieldset>
+                                                        <button type="submit" id="form-submit" class="main-button">Send
+                                                            Message
+                                                        </button>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </section>
+
+
+{% endblock %}

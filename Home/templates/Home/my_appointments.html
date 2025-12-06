@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="container my-5">
+    <h2 class="mb-4 text-center">My Appointments</h2>
+
+    {% if my_nobats %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for obj in my_nobats %}
+                <div class="col">
+                    <div class="card h-100 border-success shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">{{ obj.day.date|date:"D, d M Y" }}</h5>
+                            <p class="card-text">
+                                <strong>Time:</strong> {{ obj.time|time:"H:i" }}
+                            </p>
+
+                            <form method="POST" action="{% url 'Home:cancel_nobat' obj.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-danger w-100">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">You have no appointments.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'Home:home' %}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+
+{% endblock %}

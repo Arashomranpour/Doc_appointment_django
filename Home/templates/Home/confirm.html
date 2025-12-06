@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-primary shadow-sm">
+                <div class="card-body text-center">
+                    <h4 class="card-title mb-3 text-primary">Confirm Your Appointment</h4>
+                    <p class="card-text"><strong>Date:</strong> {{ nobat.day.date|date:"D, d M Y" }}</p>
+                    <p class="card-text"><strong>Time:</strong> {{ nobat.time|time:"H:i" }}</p>
+
+                    <form method="POST" action="{% url 'Home:reserve_nobat' nobat.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success w-100 mb-2">Confirm Reservation</button>
+                        <a href="{% url 'Home:home' %}" class="btn btn-secondary w-100">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

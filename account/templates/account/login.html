@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <!-- Contact Start -->
+    <div class="container-fluid">
+        <h2 class="section-title position-relative text-uppercase text-center mx-xl-5 mb-4"><span
+                class="bg-white pr-3">User Login</span></h2>
+        <div class=" px-xl-5">
+            <div class=" mb-5 contact-us" style="">
+                <div class="contact-form bg-white p-30">
+                    <div id="success"></div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            {% for error in form.password.errors %}
+                                <p class="alert alert-danger">
+                                    {{ error }}
+                                </p>
+                            {% endfor %}
+                            {% for error in form.phone.errors %}
+                                <p class="alert alert-danger">
+                                    {{ error }}
+                                </p>
+                            {% endfor %}
+                            {{ form.phone }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            {{ form.password }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Login
+                            </button>
+                <a href="{% url 'account:register' %}" class="py-2 px-4">Dont Have an Account? Register Here</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Contact End -->
+<!-- Toastify CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+<!-- Toastify JS -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Check if URL has ?already_exists=1
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('already_exists') === '1') {
+        Toastify({
+            text: "This phone is already registered. Redirecting to login.",
+            duration: 5000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "black",
+        }).showToast();
+    }
+});
+{#history.replaceState(null, "", window.location.pathname);#}
+
+</script>
+
+{% endblock %}

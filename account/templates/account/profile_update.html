@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow p-4">
+            <h4 class="text-center mb-3">Update Profile</h4>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">New Password</label>
+                    {{ form.password1 }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Repeat Password</label>
+                    {{ form.password2 }}
+                </div>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger py-2">
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+
+                <button class="btn btn-primary w-100" type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<a href="{% url 'account:DeleteProfile' %}" class="container mt-5 d-flex text-danger justify-content-center">Profile Delete</a>
+{% if success %}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+    <div class="toast align-items-center text-bg-success border-0 show" role="alert">
+        <div class="d-flex">
+            <div class="toast-body">
+                Profile updated successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

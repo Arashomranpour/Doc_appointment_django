@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+ <div class="text-center mt-4">
+        <a href="{% url 'Home:my_appointments' %}" class="btn btn-primary">My Appointments</a>
+    </div>
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Available Appointments</h2>
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+    {% if objects %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for obj in objects %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ obj.day.date|date:"D, d M Y" }}</h5>
+                            <p class="card-text">
+                                <strong>Time:</strong> {{ obj.time|time:"H:i" }}
+                            </p>
+                            <a href="{% url 'Home:reserve_confirm' obj.id %}"
+                               class="btn btn-success w-100">Reserve</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No available appointments.</p>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
